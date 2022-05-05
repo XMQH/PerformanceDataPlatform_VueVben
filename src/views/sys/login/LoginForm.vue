@@ -100,6 +100,7 @@
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import {UserInfo} from "/#/store";
   //import { onKeyStroke } from '@vueuse/core';
 
   const ACol = Col;
@@ -131,6 +132,7 @@
 
   async function handleLogin() {
     const data = await validForm();
+    console.log(data);
     if (!data) return;
     try {
       loading.value = true;
@@ -139,10 +141,11 @@
         username: data.account,
         mode: 'none', //不要默认的错误提示
       });
+      console.log(1111111);
       if (userInfo) {
         notification.success({
           message: t('sys.login.loginSuccessTitle'),
-          description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
+          description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.nickname}`,
           duration: 3,
         });
       }
